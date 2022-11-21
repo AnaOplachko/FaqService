@@ -1,0 +1,10 @@
+{
+  "language":
+  {
+    "feature": "en-EN",
+    "unitTestProvider":
+    {
+      "name":"xUnit"
+    }
+  }
+}

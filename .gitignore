@@ -1,0 +1,32 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Rider ignored files
+/.idea.FaqService.iml
+/projectSettingsUpdater.xml
+/modules.xml
+/contentModel.xml
+
+# Editor-based HTTP Client requests
+/httpRequests/
+
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# User-specific stuff
+.idea/
+
+# AWS User-specific
+.idea/**/aws.xml
+
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# Build results
+**/[Bb]in/
+**/[Oo]bj/

@@ -1,0 +1,26 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/Users/user/Library/Caches/JetBrains/Rider2022.2/resharper-host/temp/Rider/vAny/CoverageData/_FaqService.216568666/Snapshot/snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=556164a0_002D9094_002D420f_002Db95c_002D5d93f8def59d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Администратор получает сообщение об ошибке, если имя тэга не уникально" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.AdminTests.Admin_Could_Make_CRUD_Operations_With_TagsFeature&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.AdminTests.Admin_Could_Make_CRUD_And_Search_Operations_With_ArticlesFeature&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.AdminTests.Admin_Could_Make_CRUD_Operations_With_SectionsFeature&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.UserTests.User_Could_Read_SectionsFeature&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.UserTests.User_Could_Read_And_Search_ArticlesFeature.ПользовательПолучаетСписокВсехСтатей&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.UserTests.User_Could_Read_And_Search_ArticlesFeature&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.UserTests.User_Could_Read_TagsFeature&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ae05e559_002Da577_002D4bfa_002Db01b_002Db133a380f12c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Admin_Could_Make_CRUD_Operations_With_SectionsFeature" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.AdminTests.Admin_Could_Make_CRUD_Operations_With_SectionsFeature&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.UserTests.User_Could_Read_SectionsFeature&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.AdminTests.Admin_Could_Make_CRUD_And_Search_Operations_With_ArticlesFeature&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::C5AF4700-2221-4E13-9BB8-2ED775CC8AA0::net7.0::FaqService.ComponentTests.Features.AdminTests.Admin_Could_Make_CRUD_Operations_With_TagsFeature&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	</wpf:ResourceDictionary>
