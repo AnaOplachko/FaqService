@@ -1,11 +1,11 @@
-namespace FaqService.Application.Models.SharedDto.OutBound;
+namespace FaqService.Application.Dtos.SharedDto.OutBound;
 
 public abstract class PaginatedResult
 {
     /// <summary>
     /// Расстраничивание
     /// </summary>
-    public Pagination Pagination { get; set; }
+    public Pagination Pagination { get; set; } = null!;
 }
 
 public class Pagination

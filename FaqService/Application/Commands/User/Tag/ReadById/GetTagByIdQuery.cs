@@ -1,4 +1,4 @@
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 
 namespace FaqService.Application.Commands.User.Tag.ReadById;

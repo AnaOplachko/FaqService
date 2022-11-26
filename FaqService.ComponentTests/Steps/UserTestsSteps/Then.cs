@@ -1,5 +1,5 @@
 using System.Net;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using FaqService.ComponentTests.Helpers;
 using FaqService.ComponentTests.Hooks.Common;
 using FluentAssertions;
@@ -43,7 +43,7 @@ public class Then : Common
         HttpResponseMessage.Should().NotBeNull();
         HttpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
         
-        var articles = HttpResponseMessage.Content.ReadAs<List<ArticleModel>>();
+        var articles = HttpResponseMessage.Content.ReadAs<List<Article>>();
         articles.Should().BeEquivalentTo(Articles);
     }
 
@@ -63,7 +63,7 @@ public class Then : Common
         HttpResponseMessage.Should().NotBeNull();
         HttpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
 
-        var articleFromServer = HttpResponseMessage.Content.ReadAs<ArticleModel>();
+        var articleFromServer = HttpResponseMessage.Content.ReadAs<Article>();
         articleFromServer.Should().BeEquivalentTo(Article);
     }
 
@@ -73,7 +73,7 @@ public class Then : Common
         HttpResponseMessage.Should().NotBeNull();
         HttpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
         
-        var tags = HttpResponseMessage.Content.ReadAs<List<TagModel>>();
+        var tags = HttpResponseMessage.Content.ReadAs<List<Tag>>();
         tags.Should().BeEquivalentTo(Tags);
     }
 
@@ -84,7 +84,7 @@ public class Then : Common
         HttpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
 
         var tagFromServer = HttpResponseMessage.Content.ReadAs<TagWithArticles>();
-        var tagAsModel = new TagModel {Id = tagFromServer!.Id, Name = tagFromServer.Name};
+        var tagAsModel = new Tag {Id = tagFromServer!.Id, Name = tagFromServer.Name};
         tagAsModel.Should().BeEquivalentTo(Tag);
     }
 }

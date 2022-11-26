@@ -1,7 +1,7 @@
 using FaqDataAccess.Repositories.ArticleRepository;
 using FaqDataAccess.Repositories.TagRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Tag.ReadById;

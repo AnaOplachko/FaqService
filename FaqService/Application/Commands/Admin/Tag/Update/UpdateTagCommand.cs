@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Tag.Update;
@@ -7,7 +6,7 @@ namespace FaqService.Application.Commands.Admin.Tag.Update;
 /// <summary>
 /// Команда на изменение тэга
 /// </summary>
-public class UpdateTagCommand : IRequest<TagModel>
+public class UpdateTagCommand : IRequest<Dtos.Tag>
 {
     /// <summary>
     /// Идентификатор

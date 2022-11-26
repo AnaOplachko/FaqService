@@ -7,10 +7,10 @@ public interface ICachedSectionRepository
     /// <summary>
     /// Возвращает все категории из кэшированного репозитория
     /// </summary>
-    Task<List<Section>> GetAllSectionsAsync();
+    ValueTask<List<Section>> GetAllSectionsAsync();
 
     /// <summary>
     /// Возвращает категорию по идентификатору из кэшированного репозитория
     /// </summary>
-    Task<Section?> GetSectionByIdAsync(int id);
+    ValueTask<Section?> GetSectionByIdAsync(int id);
 }

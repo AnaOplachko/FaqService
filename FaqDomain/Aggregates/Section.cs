@@ -8,8 +8,8 @@ namespace FaqDomain.Aggregates;
 public class Section : Entity
 {
     private string _name;
-    private List<Section> _subsections;
-    private List<Article> _articles;
+    private List<Section>? _subsections;
+    private List<Article>? _articles;
 
     /// <summary>
     /// Идентификатор

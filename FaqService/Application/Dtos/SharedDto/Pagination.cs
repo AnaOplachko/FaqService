@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FaqService.Application.Models.SharedDto;
+namespace FaqService.Application.Dtos.SharedDto;
 
 public class Pagination
 {

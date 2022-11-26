@@ -17,15 +17,15 @@ public class ArticleShould
         //arrange
         var answer = "no one";
         var question = "who is john golt?";
-        var parentId = 11;
+        var parent = new Section { Name = "section", Id = 1, ParentId = 3};
 
         //act
-        var article = new Article(question, answer, parentId);
+        var article = new Article(question, answer, parent);
 
         //assert
         article.Question.Should().Be(question);
         article.Answer.Should().Be(answer);
-        article.ParentId.Should().Be(parentId);
+        article.ParentId.Should().Be(parent.Id);
     }
 
     /// <summary>
@@ -39,10 +39,10 @@ public class ArticleShould
     {
         //arrange
         var question = "valid question";
-        var parentId = 11;
+        var parent = new Section { Name = "section", Id = 1, ParentId = 3};
         
         //act
-        Func<Article> createArticleFunc = () => new Article(question, answer, parentId);
+        Func<Article> createArticleFunc = () => new Article(question, answer, parent);
         
         //assert
         Assert.Throws<DomainValidateException>(createArticleFunc);
@@ -59,10 +59,28 @@ public class ArticleShould
     {
         //arrange
         var answer = "valid answer";
-        var parentId = 11;
+        var parent = new Section { Name = "section", Id = 1, ParentId = 3};
 
         //act
-        Func<Article> createArticleFunc = () => new Article(question, answer, parentId);
+        Func<Article> createArticleFunc = () => new Article(question, answer, parent);
+
+        //assert
+        Assert.Throws<DomainValidateException>(createArticleFunc);
+    }
+
+    /// <summary>
+    /// Бросает ошибку при некорректном родителе
+    /// </summary>
+    [Fact]
+    public void NotBeCreatedWhenParentIsRoot()
+    {
+        //arrange
+        var answer = "no one";
+        var question = "who is john golt?";
+        var parent = new Section { Name = "section", Id = 1, ParentId = null};
+        
+        //act
+        Func<Article> createArticleFunc = () => new Article(question, answer, parent);
 
         //assert
         Assert.Throws<DomainValidateException>(createArticleFunc);

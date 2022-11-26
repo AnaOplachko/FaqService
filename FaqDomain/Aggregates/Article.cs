@@ -72,40 +72,51 @@ public class Article : Entity
     /// <summary>
     /// ctor
     /// </summary>
-    public Article(string question, string answer, int parentId, int? orderPosition = null)
+    public Article(string question, string answer, Section parent, int? orderPosition = null)
     {
         Question = question;
         Answer = answer;
-        ParentId = parentId;
-        SetOrderPosition(orderPosition, parentId);
+        SetParent(parent);
+        SetOrderPosition(orderPosition, parent.Id);
         Tags = new List<Tag>();
     }
 
     /// <summary>
     /// ctor
     /// </summary>
-    public Article() { }
+    protected Article() { }
+
+    /// <summary>
+    /// Устанавливает родительскую категорию
+    /// </summary>
+    private void SetParent(Section parent)
+    {
+        var isParentRootSection = parent.ParentId == null;
+        if (isParentRootSection)
+            throw new DomainValidateException("Родительская категория не может быть корневой");
+
+        ParentId = parent.Id;
+    }
 
     /// <summary>
     /// Обновление доменного объекта
     /// </summary>
-    public void Update(string question, string answer, int parentId, Section parent, int? orderPosition)
+    public void Update(string question, string answer, Section parent, int? orderPosition)
     {
         Question = question;
         Answer = answer;
 
-        var isNewParent = ParentId != parentId;
+        var isNewParent = ParentId != parent.Id;
             
         if (isNewParent)
         {
+            SetParent(parent);
             UpdatePositionsAfterRemove();
-            ParentId = parentId;
-            Parent = parent;
-            SetOrderPosition(orderPosition, parentId);
+            SetOrderPosition(orderPosition, parent.Id);
         }
 
         if (OrderPosition != orderPosition && !isNewParent)
-            UpdateOrderPosition(parentId, orderPosition);
+            UpdateOrderPosition(parent.Id, orderPosition);
     }
     
     /// <summary>
@@ -145,7 +156,7 @@ public class Article : Entity
     { 
         AddDomainEvent(new ArticleRemovedFromSectionEvent(Id,ParentId, OrderPosition));
     }
-
+    
     /// <summary>
     /// Устанавливает статье тэги
     /// </summary>

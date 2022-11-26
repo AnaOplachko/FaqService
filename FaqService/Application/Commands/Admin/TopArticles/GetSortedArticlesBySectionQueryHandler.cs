@@ -1,6 +1,5 @@
 using FaqDataAccess.Repositories.ArticleRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.TopArticles;
@@ -8,7 +7,7 @@ namespace FaqService.Application.Commands.Admin.TopArticles;
 /// <summary>
 /// Обработчик запроса на получение отсортированного по позиции списка статей
 /// </summary>
-public class GetSortedArticlesBySectionQueryHandler : IRequestHandler<GetSortedArticlesBySectionQuery, List<ArticleModel>>
+public class GetSortedArticlesBySectionQueryHandler : IRequestHandler<GetSortedArticlesBySectionQuery, List<Dtos.Article>>
 {
     private readonly IArticleRepository _articleRepository;
 
@@ -21,7 +20,7 @@ public class GetSortedArticlesBySectionQueryHandler : IRequestHandler<GetSortedA
     /// <summary>
     /// Обработчик
     /// </summary>
-    public async Task<List<ArticleModel>> Handle(GetSortedArticlesBySectionQuery request, CancellationToken cancellationToken)
+    public async Task<List<Dtos.Article>> Handle(GetSortedArticlesBySectionQuery request, CancellationToken cancellationToken)
     {
         var articles = (await _articleRepository.GetAllArticlesAsync())
             .Where(x=>x.ParentId == request.SectionId)
@@ -31,6 +30,6 @@ public class GetSortedArticlesBySectionQueryHandler : IRequestHandler<GetSortedA
         if (articles.Count is 0)
             throw new NoEntityException("No articles found");
 
-        return articles.Select(x => new ArticleModel(x)).ToList();
+        return articles.Select(x => new Dtos.Article(x)).ToList();
     }
 }

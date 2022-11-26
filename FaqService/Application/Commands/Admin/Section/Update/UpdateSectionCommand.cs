@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Section.Update;
@@ -7,7 +6,7 @@ namespace FaqService.Application.Commands.Admin.Section.Update;
 /// <summary>
 /// Команда на изменение категории
 /// </summary>
-public class UpdateSectionCommand : IRequest<SectionModel>
+public class UpdateSectionCommand : IRequest<Dtos.Section>
 {
     /// <summary>
     /// Идентификатор

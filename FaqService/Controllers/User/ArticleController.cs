@@ -1,7 +1,7 @@
 using FaqService.Application.Commands.User.Article.ReadAll;
 using FaqService.Application.Commands.User.Article.ReadById;
 using FaqService.Application.Commands.User.Article.Search;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,13 +23,13 @@ public class ArticleController : ControllerBase
     /// Возвращает лист всех статей
     /// </summary>
     [HttpGet("all")]
-    public async Task<List<ArticleModel>> GetAllArticles() => await _mediator.Send(new GetAllArticlesQuery());
+    public async Task<List<Article>> GetAllArticles() => await _mediator.Send(new GetAllArticlesQuery());
 
     /// <summary>
     /// Метод обработчик запроса на получение статьи по идентификатору
     /// </summary>
     [HttpGet("{id}")]
-    public async Task<ArticleModel> GetArticleById([FromRoute] int id) 
+    public async Task<Article> GetArticleById([FromRoute] int id) 
         => await _mediator.Send(new GetArticleByIdQuery { Id = id });
 
     /// <summary>

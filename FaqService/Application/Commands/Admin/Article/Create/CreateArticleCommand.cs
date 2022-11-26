@@ -1,4 +1,3 @@
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Article.Create;
@@ -6,7 +5,7 @@ namespace FaqService.Application.Commands.Admin.Article.Create;
 /// <summary>
 /// Команда на создание статьи
 /// </summary>
-public class CreateArticleCommand : IRequest<ArticleModel>
+public class CreateArticleCommand : IRequest<Dtos.Article>
 {
     /// <summary>
     /// Вопрос

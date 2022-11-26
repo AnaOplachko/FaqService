@@ -1,5 +1,4 @@
 using FaqDataAccess.Repositories.TagRepository;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Tag.Create;
@@ -7,7 +6,7 @@ namespace FaqService.Application.Commands.Admin.Tag.Create;
 /// <summary>
 /// Обработчик команды на создание тэга
 /// </summary>
-public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, TagModel>
+public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, Dtos.Tag>
 {
     private readonly ITagRepository _tagRepository;
 
@@ -19,7 +18,7 @@ public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, TagMode
     /// <summary>
     /// Обработчик
     /// </summary>
-    public async Task<TagModel> Handle(CreateTagCommand request, CancellationToken cancellationToken)
+    public async Task<Dtos.Tag> Handle(CreateTagCommand request, CancellationToken cancellationToken)
     {
         var existingTags = await _tagRepository.GetAllTagsAsync();
         var newTag = new FaqDomain.Aggregates.Tag(request.Name, existingTags);
@@ -27,6 +26,6 @@ public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, TagMode
         _tagRepository.CreateTag(newTag);
         await _tagRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
         
-        return new TagModel(newTag);
+        return new Dtos.Tag(newTag);
     }
 }

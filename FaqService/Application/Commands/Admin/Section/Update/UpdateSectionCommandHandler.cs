@@ -1,6 +1,5 @@
 using FaqDataAccess.Repositories.SectionRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Section.Update;
@@ -8,7 +7,7 @@ namespace FaqService.Application.Commands.Admin.Section.Update;
 /// <summary>
 /// Обработчик команды на изменение категории
 /// </summary>
-public class UpdateSectionCommandHandler : IRequestHandler<UpdateSectionCommand, SectionModel>
+public class UpdateSectionCommandHandler : IRequestHandler<UpdateSectionCommand, Dtos.Section>
 {
     private readonly ISectionRepository _sectionRepository;
 
@@ -21,7 +20,7 @@ public class UpdateSectionCommandHandler : IRequestHandler<UpdateSectionCommand,
     /// <summary>
     /// Обработчик
     /// </summary>
-    public async Task<SectionModel> Handle(UpdateSectionCommand request, CancellationToken cancellationToken)
+    public async Task<Dtos.Section> Handle(UpdateSectionCommand request, CancellationToken cancellationToken)
     {
         var sectionToUpdate = await _sectionRepository.GetSectionByIdAsync(request.Id);
 
@@ -40,6 +39,6 @@ public class UpdateSectionCommandHandler : IRequestHandler<UpdateSectionCommand,
         _sectionRepository.UpdateSection(sectionToUpdate);
         await _sectionRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new SectionModel(sectionToUpdate);
+        return new Dtos.Section(sectionToUpdate);
     }
 }

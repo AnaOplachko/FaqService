@@ -25,7 +25,7 @@ public class CachedSectionRepository : ICachedSectionRepository
     /// <summary>
     /// Возвращает все категории из кэшированного репозитория
     /// </summary>
-    public async Task<List<Section>> GetAllSectionsAsync()
+    public async ValueTask<List<Section>> GetAllSectionsAsync()
     {
         var cacheKey = "sections";
 
@@ -64,6 +64,6 @@ public class CachedSectionRepository : ICachedSectionRepository
     /// <summary>
     /// Возвращает категорию по идентификатору из кэшированного репозитория
     /// </summary>
-    public async Task<Section?> GetSectionByIdAsync(int id)
+    public async ValueTask<Section?> GetSectionByIdAsync(int id)
         => (await GetAllSectionsAsync()).FirstOrDefault(x => x.Id == id);
 }

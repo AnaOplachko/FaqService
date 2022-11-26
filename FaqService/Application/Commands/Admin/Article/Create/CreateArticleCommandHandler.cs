@@ -1,7 +1,6 @@
 using FaqDataAccess.Repositories.ArticleRepository;
 using FaqDataAccess.Repositories.SectionRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Article.Create;
@@ -9,7 +8,7 @@ namespace FaqService.Application.Commands.Admin.Article.Create;
 /// <summary>
 /// Обработчик команды на создание новой статьи
 /// </summary>
-public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand, ArticleModel>
+public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand, Dtos.Article>
 {
     private readonly ISectionRepository _sectionRepository;
     private readonly IArticleRepository _articleRepository;
@@ -26,22 +25,18 @@ public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand,
     /// <summary>
     /// Обработчик
     /// </summary>
-    public async Task<ArticleModel> Handle(CreateArticleCommand request, CancellationToken cancellationToken)
+    public async Task<Dtos.Article> Handle(CreateArticleCommand request, CancellationToken cancellationToken)
     {
         var parent = await _sectionRepository.GetSectionByIdAsync(request.ParentId);
 
         if (parent == null!)
             throw new NoEntityException("По идентификатору родительской категории ничего не найдено");
-
-        var isParentRootSection = parent.ParentId == null;
-        if (isParentRootSection)
-            throw new InvalidEntityException("Родительская категория не может быть корневой");
-            
+        
         var newArticle =
-            new FaqDomain.Aggregates.Article(request.Question, request.Answer, request.ParentId, request.OrderPosition);
+            new FaqDomain.Aggregates.Article(request.Question, request.Answer, parent, request.OrderPosition);
         
         _articleRepository.CreateArticle(newArticle);
         await _articleRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-        return new ArticleModel(newArticle);
+        return new Dtos.Article(newArticle);
     }
 }

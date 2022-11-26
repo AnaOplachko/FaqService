@@ -1,6 +1,6 @@
-namespace FaqService.Application.Models;
+namespace FaqService.Application.Dtos;
 
-public class TagModel
+public class Tag
 {
     /// <summary>
     /// Идентификатор
@@ -15,7 +15,7 @@ public class TagModel
     /// <summary>
     /// ctor
     /// </summary>
-    public TagModel(FaqDomain.Aggregates.Tag tag)
+    public Tag(FaqDomain.Aggregates.Tag tag)
     {
         Id = tag.Id;
         Name = tag.Name;
@@ -24,5 +24,5 @@ public class TagModel
     /// <summary>
     /// ctor
     /// </summary>
-    public TagModel() { }
+    public Tag() { }
 }

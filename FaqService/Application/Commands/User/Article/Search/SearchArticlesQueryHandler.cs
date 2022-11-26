@@ -1,6 +1,6 @@
 using FaqDataAccess.Repositories.ArticleRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 
 namespace FaqService.Application.Commands.User.Article.Search;
@@ -34,8 +34,8 @@ public class SearchArticlesQueryHandler : IRequestHandler<SearchArticlesQuery, P
         
         return new PaginatedSearchArticlesResult
         {
-            Articles = articlesToShowOnPage.Select(x => new ArticleModel(x)).ToList(),
-            Pagination = new Models.SharedDto.OutBound.Pagination
+            Articles = articlesToShowOnPage.Select(x => new Dtos.Article(x)).ToList(),
+            Pagination = new Dtos.SharedDto.OutBound.Pagination
             {
                 CurrentPage = request.Pagination.Page,
                 PageSize = request.Pagination.PageSize,

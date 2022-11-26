@@ -1,6 +1,6 @@
 using FaqService.Application.Commands.User.Section.ReadAll;
 using FaqService.Application.Commands.User.Section.ReadById;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

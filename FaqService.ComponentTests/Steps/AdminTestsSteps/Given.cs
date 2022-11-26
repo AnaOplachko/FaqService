@@ -1,11 +1,8 @@
-using System.Text;
-using System.Text.Json;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using FaqService.ComponentTests.ExternalEnvironment;
 using FaqService.ComponentTests.Helpers;
 using FaqService.ComponentTests.Hooks.Common;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
 
 namespace FaqService.ComponentTests.Steps.AdminTestsSteps;
 
@@ -19,7 +16,7 @@ public class Given : Common
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
 
-        Section = HttpResponseMessage.Content.ReadAs<SectionModel>();
+        Section = HttpResponseMessage.Content.ReadAs<Section>();
         
         SectionsWithSubs.Add(new SectionWithSubs(Section!));
     }
@@ -33,7 +30,7 @@ public class Given : Common
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
 
-        Section = HttpResponseMessage.Content.ReadAs<SectionModel>();
+        Section = HttpResponseMessage.Content.ReadAs<Section>();
         
         SectionsWithSubs.Add(new SectionWithSubs(Section!));
         
@@ -51,7 +48,7 @@ public class Given : Common
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
 
-        Article = HttpResponseMessage.Content.ReadAs<ArticleModel>()!;
+        Article = HttpResponseMessage.Content.ReadAs<Article>()!;
 
         Articles.Add(Article);
     }
@@ -63,7 +60,7 @@ public class Given : Common
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
 
-        Tag = HttpResponseMessage.Content.ReadAs<TagModel>()!;
+        Tag = HttpResponseMessage.Content.ReadAs<Tag>()!;
             
         Tags.Add(Tag);
     }

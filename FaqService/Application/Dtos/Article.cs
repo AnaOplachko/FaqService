@@ -1,6 +1,6 @@
-namespace FaqService.Application.Models;
+namespace FaqService.Application.Dtos;
 
-public class ArticleModel
+public record Article
 {
     /// <summary>
     /// Идентификатор
@@ -30,32 +30,23 @@ public class ArticleModel
     /// <summary>
     /// Тэги вопроса
     /// </summary>
-    public IReadOnlyCollection<TagModel>? Tags { get; set; } = new List<TagModel>();
+    public IReadOnlyCollection<Tag>? Tags { get; set; } = new List<Tag>();
 
     /// <summary>
     /// ctor
     /// </summary>
-    public ArticleModel(FaqDomain.Aggregates.Article article)
+    public Article(FaqDomain.Aggregates.Article article)
     {
         Id = article.Id;
         Question = article.Question;
         Answer = article.Answer;
         ParentId = article.ParentId;
         OrderPosition = article.OrderPosition;
-        SetTags(article.Tags!);
+        Tags = article.Tags?.Select(x => new Tag(x)).ToList();
     }
 
     /// <summary>
     /// ctor
     /// </summary>
-    public ArticleModel() {}
-    
-    /// <summary>
-    /// Установить тэги
-    /// </summary>
-    private void SetTags(IReadOnlyCollection<FaqDomain.Aggregates.Tag> tags)
-    {
-        if (tags != null!)
-            Tags = tags.Select(x => new TagModel(x)).ToList();
-    }
+    public Article() {}
 }

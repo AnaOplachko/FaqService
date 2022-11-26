@@ -1,4 +1,3 @@
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Article.Update;
@@ -6,7 +5,7 @@ namespace FaqService.Application.Commands.Admin.Article.Update;
 /// <summary>
 /// Команда на обновление статьи
 /// </summary>
-public class UpdateArticleCommand : IRequest<ArticleModel>
+public class UpdateArticleCommand : IRequest<Dtos.Article>
 {
     /// <summary>
     /// Идентификатор

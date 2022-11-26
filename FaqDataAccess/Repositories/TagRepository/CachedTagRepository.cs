@@ -25,7 +25,7 @@ public class CachedTagRepository : ICachedTagRepository
     /// <summary>
     /// Возвращает все тэги
     /// </summary>
-    public async Task<List<Tag>> GetAllTagsAsync()
+    public async ValueTask<List<Tag>> GetAllTagsAsync()
     {
         var cacheKey = "tags";
 
@@ -64,5 +64,5 @@ public class CachedTagRepository : ICachedTagRepository
     /// <summary>
     /// Возврщает тэг по идентификатору
     /// </summary>
-    public async Task<Tag?> GetTagByIdAsync(int id) => (await GetAllTagsAsync()).FirstOrDefault(x => x.Id == id);
+    public async ValueTask<Tag?> GetTagByIdAsync(int id) => (await GetAllTagsAsync()).FirstOrDefault(x => x.Id == id);
 }

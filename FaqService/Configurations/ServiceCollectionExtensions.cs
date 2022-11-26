@@ -99,9 +99,6 @@ public static class ServiceCollectionExtensions
             options.Map<DomainValidateException>(ex =>
                 new CustomRepresentationProblemDetails(StatusCodes.Status400BadRequest, 
                     ex.Message, serviceProvider));
-            options.Map<InvalidEntityException>(ex =>
-                new CustomRepresentationProblemDetails(StatusCodes.Status400BadRequest, 
-                    ex.Message, serviceProvider));
             options.Map<InvalidSearchRequestException>(ex => 
                 new CustomRepresentationProblemDetails(StatusCodes.Status400BadRequest, 
                     ex.Message, serviceProvider));

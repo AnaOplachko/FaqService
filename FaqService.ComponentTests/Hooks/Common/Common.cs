@@ -1,4 +1,4 @@
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using TechTalk.SpecFlow;
 
 namespace FaqService.ComponentTests.Hooks.Common;
@@ -9,7 +9,7 @@ public class Common
     /// <summary>
     /// Последняя созданная категория
     /// </summary>
-    protected static SectionModel? Section = null!;
+    protected static Section? Section = null!;
 
     /// <summary>
     /// Созданные категории
@@ -19,27 +19,32 @@ public class Common
     /// <summary>
     /// Последняя созданная статья
     /// </summary>
-    protected static ArticleModel Article = null!;
+    protected static Article Article = null!;
 
     /// <summary>
     /// Созданные статьи
     /// </summary>
-    protected static readonly List<ArticleModel?> Articles = new();
+    protected static readonly List<Article?> Articles = new();
 
     /// <summary>
     /// Последний тэг
     /// </summary>
-    protected static TagModel Tag = null!;
+    protected static Tag Tag = null!;
 
     /// <summary>
     /// Созданные тэги
     /// </summary>
-    protected static readonly List<TagModel?> Tags = new();
+    protected static readonly List<Tag?> Tags = new();
 
     /// <summary>
     /// http ответ
     /// </summary>
     protected static HttpResponseMessage HttpResponseMessage { get; set; } = null!;
+    
+    /// <summary>
+    /// Некорректный идентификатор, по которому гарантировано не будет возвращен результат запроса
+    /// </summary>
+    protected const int IncorrectId = Int32.MaxValue;
 
     /// <summary>
     /// Очистка состояния

@@ -7,10 +7,10 @@ public interface ICachedTagRepository
     /// <summary>
     /// Возвращает все тэги
     /// </summary>
-    Task<List<Tag>> GetAllTagsAsync();
+    ValueTask<List<Tag>> GetAllTagsAsync();
 
     /// <summary>
     /// Возвращает тэг по идентификатору
     /// </summary>
-    Task<Tag?> GetTagByIdAsync(int id);
+    ValueTask<Tag?> GetTagByIdAsync(int id);
 }

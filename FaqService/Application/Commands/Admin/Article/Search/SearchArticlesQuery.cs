@@ -1,5 +1,5 @@
-using FaqService.Application.Models;
-using FaqService.Application.Models.SharedDto;
+using FaqService.Application.Dtos;
+using FaqService.Application.Dtos.SharedDto;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Article.Search;

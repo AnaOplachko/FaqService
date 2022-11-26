@@ -1,6 +1,5 @@
 using FaqDataAccess.Repositories.SectionRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Section.Create;
@@ -8,7 +7,7 @@ namespace FaqService.Application.Commands.Admin.Section.Create;
 /// <summary>
 /// Обработчик команды на создание категории
 /// </summary>
-public class CreateSectionCommandHandler : IRequestHandler<CreateSectionCommand, SectionModel>
+public class CreateSectionCommandHandler : IRequestHandler<CreateSectionCommand, Dtos.Section>
 {
     private readonly ISectionRepository _sectionRepository;
 
@@ -20,7 +19,7 @@ public class CreateSectionCommandHandler : IRequestHandler<CreateSectionCommand,
     /// <summary>
     /// Обработчик
     /// </summary>
-    public async Task<SectionModel> Handle(CreateSectionCommand request, CancellationToken cancellationToken)
+    public async Task<Dtos.Section> Handle(CreateSectionCommand request, CancellationToken cancellationToken)
     {
         if (request.ParentId != null)
         {
@@ -37,6 +36,6 @@ public class CreateSectionCommandHandler : IRequestHandler<CreateSectionCommand,
         
         _sectionRepository.CreateSection(newSection);
         await _sectionRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-        return new SectionModel(newSection);
+        return new Dtos.Section(newSection);
     }
 }

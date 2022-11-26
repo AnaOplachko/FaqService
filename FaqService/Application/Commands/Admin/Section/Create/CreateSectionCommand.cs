@@ -1,4 +1,3 @@
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Section.Create;
@@ -6,7 +5,7 @@ namespace FaqService.Application.Commands.Admin.Section.Create;
 /// <summary>
 /// Команда на создание категории
 /// </summary>
-public class CreateSectionCommand : IRequest<SectionModel>
+public class CreateSectionCommand : IRequest<Dtos.Section>
 {
     /// <summary>
     /// Название

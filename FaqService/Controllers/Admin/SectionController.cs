@@ -3,7 +3,7 @@ using FaqService.Application.Commands.Admin.Section.Delete;
 using FaqService.Application.Commands.Admin.Section.ReadAll;
 using FaqService.Application.Commands.Admin.Section.ReadById;
 using FaqService.Application.Commands.Admin.Section.Update;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,14 +37,14 @@ public class SectionController : ControllerBase
     /// Создание категории
     /// </summary>
     [HttpPost("")]
-    public async Task<SectionModel> CreateSection([FromBody] CreateSectionCommand createSectionCommand)
+    public async Task<Section> CreateSection([FromBody] CreateSectionCommand createSectionCommand)
         => await _mediator.Send(createSectionCommand);
 
     /// <summary>
     /// Изменение категории
     /// </summary>
     [HttpPut("{id}")]
-    public async Task<SectionModel> UpdateSection([FromRoute] int id, [FromBody] UpdateSectionCommand updateSectionCommand)
+    public async Task<Section> UpdateSection([FromRoute] int id, [FromBody] UpdateSectionCommand updateSectionCommand)
     {
         updateSectionCommand.Id = id;
         return await _mediator.Send(updateSectionCommand);

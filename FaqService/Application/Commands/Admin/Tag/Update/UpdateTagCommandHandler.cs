@@ -1,6 +1,5 @@
 using FaqDataAccess.Repositories.TagRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Tag.Update;
@@ -8,7 +7,7 @@ namespace FaqService.Application.Commands.Admin.Tag.Update;
 /// <summary>
 /// Обработчик команды на измененение тэга
 /// </summary>
-public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, TagModel>
+public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, Dtos.Tag>
 {
     private readonly ITagRepository _tagRepository;
 
@@ -20,7 +19,7 @@ public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, TagMode
     /// <summary>
     /// Обработчик
     /// </summary>
-    public async Task<TagModel> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
+    public async Task<Dtos.Tag> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
     {
         var existingTags = await _tagRepository.GetAllTagsAsync();
 
@@ -34,6 +33,6 @@ public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, TagMode
         _tagRepository.UpdateTag(tag);
         await _tagRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new TagModel(tag);
+        return new Dtos.Tag(tag);
     }
 }

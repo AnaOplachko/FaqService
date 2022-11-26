@@ -27,9 +27,7 @@ public class When : Common
     [When(@"Пользователь запрашивает категорию с некорректным идентификатором")]
     public async Task WhenПользовательЗапрашиваетКатегориюСНекорректнымИдентификатором()
     {
-        var incorrectId = int.MaxValue;
-        
-        var request = new RequestMessageBuilder().WithUserGetSectionByIdQuery(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithUserGetSectionByIdQuery(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -69,9 +67,7 @@ public class When : Common
     [When(@"Пользователь запрашивает статью с некорректным идентификатором")]
     public async Task WhenПользовательЗапрашиваетСтатьюСНекорректнымИдентификатором()
     {
-        var incorrectId = int.MaxValue;
-        
-        var request = new RequestMessageBuilder().WithUserGetArticleByIdQuery(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithUserGetArticleByIdQuery(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -95,9 +91,7 @@ public class When : Common
     [When(@"Пользователь запрашивает тэг с некорректным идентификатором")]
     public async Task WhenПользовательЗапрашиваетТэгСНекорректнымИдентификатором()
     {
-        var incorrectId = int.MaxValue;
-        
-        var request = new RequestMessageBuilder().WithUserGetTagByIdQuery(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithUserGetTagByIdQuery(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }

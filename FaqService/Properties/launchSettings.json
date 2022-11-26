@@ -13,7 +13,7 @@
         "DBSETTINGS__PORT": "5432",
         "DBSETTINGS__DBNAME": "FaqDb",
 
-        "MemoryCacheSettings__Expiration": "0"
+        "MemoryCacheSettings__Expiration": "5"
       }
     }
   }

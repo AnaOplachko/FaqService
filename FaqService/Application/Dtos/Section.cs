@@ -1,6 +1,6 @@
-namespace FaqService.Application.Models;
+namespace FaqService.Application.Dtos;
 
-public class SectionModel
+public record Section
 {
     /// <summary>
     /// Идентификатор
@@ -20,7 +20,7 @@ public class SectionModel
     /// <summary>
     /// ctor
     /// </summary>
-    public SectionModel(FaqDomain.Aggregates.Section section)
+    public Section(FaqDomain.Aggregates.Section section)
     {
         Id = section.Id;
         ParentId = section.ParentId;
@@ -30,5 +30,5 @@ public class SectionModel
     /// <summary>
     /// ctor
     /// </summary>
-    public SectionModel() { }
+    public Section() { }
 }

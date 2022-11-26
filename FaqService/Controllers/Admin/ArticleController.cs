@@ -5,7 +5,7 @@ using FaqService.Application.Commands.Admin.Article.ReadById;
 using FaqService.Application.Commands.Admin.Article.Search;
 using FaqService.Application.Commands.Admin.Article.SetTags;
 using FaqService.Application.Commands.Admin.Article.Update;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,20 +26,20 @@ public class ArticleController : ControllerBase
     /// Возвращает лист всех статей
     /// </summary>
     [HttpGet("all")]
-    public async Task<List<ArticleModel>> GetAllArticles() => await _mediator.Send(new GetAllArticlesQuery());
+    public async Task<List<Article>> GetAllArticles() => await _mediator.Send(new GetAllArticlesQuery());
 
     /// <summary>
     /// Возвращает статью по идентификатору
     /// </summary>
     [HttpGet("{id}")]
-    public async Task<ArticleModel> GetArticleById([FromRoute] int id)
+    public async Task<Article> GetArticleById([FromRoute] int id)
         => await _mediator.Send(new GetArticleByIdQuery { Id = id });
 
     /// <summary>
     /// Обновление тегов вопроса
     /// </summary>
     [HttpPut("{id}/tags")]
-    public async Task<ArticleModel> SetTags([FromRoute] int id, [FromBody] SetTagsCommand setTagsCommand)
+    public async Task<Article> SetTags([FromRoute] int id, [FromBody] SetTagsCommand setTagsCommand)
     {
         setTagsCommand.Id = id;
         return await _mediator.Send(setTagsCommand);
@@ -56,14 +56,14 @@ public class ArticleController : ControllerBase
     /// Создание статьи
     /// </summary>
     [HttpPost("")]
-    public async Task<ArticleModel> CreateArticle([FromBody] CreateArticleCommand createArticleCommand)
+    public async Task<Article> CreateArticle([FromBody] CreateArticleCommand createArticleCommand)
         => await _mediator.Send(createArticleCommand);
 
     /// <summary>
     /// Изменение статьи
     /// </summary>
     [HttpPut("{id}")]
-    public async Task<ArticleModel> UpdateArticle([FromRoute] int id, [FromBody] UpdateArticleCommand updateArticleCommand)
+    public async Task<Article> UpdateArticle([FromRoute] int id, [FromBody] UpdateArticleCommand updateArticleCommand)
     {
         updateArticleCommand.Id = id;
         return await _mediator.Send(updateArticleCommand);

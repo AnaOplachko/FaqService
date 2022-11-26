@@ -1,6 +1,5 @@
 using FaqDataAccess.Repositories.TagRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.User.Tag.ReadAll;
@@ -8,7 +7,7 @@ namespace FaqService.Application.Commands.User.Tag.ReadAll;
 /// <summary>
 /// Обработчик запроса на получние пользователем всех тэгов
 /// </summary>
-public class GetAllTagsQueryHandler : IRequestHandler<GetAllTagsQuery, List<TagModel>>
+public class GetAllTagsQueryHandler : IRequestHandler<GetAllTagsQuery, List<Dtos.Tag>>
 {
     private readonly ICachedTagRepository _cachedTagRepository;
 
@@ -21,13 +20,13 @@ public class GetAllTagsQueryHandler : IRequestHandler<GetAllTagsQuery, List<TagM
     /// <summary>
     /// Обработчик
     /// </summary>
-    public async Task<List<TagModel>> Handle(GetAllTagsQuery request, CancellationToken cancellationToken)
+    public async Task<List<Dtos.Tag>> Handle(GetAllTagsQuery request, CancellationToken cancellationToken)
     {
         var tags = await _cachedTagRepository.GetAllTagsAsync();
 
         if (tags.Count == 0)
             throw new NoEntityException("No tags found");
 
-        return tags.Select(x => new TagModel(x)).ToList();
+        return tags.Select(x => new Dtos.Tag(x)).ToList();
     }
 }

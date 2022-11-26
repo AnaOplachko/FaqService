@@ -1,5 +1,5 @@
 using FaqService.Application.Commands.Admin.TopArticles;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +21,6 @@ public class TopArticlesController : Controller
     /// </summary>
     /// <param name="id"> Идентификатор родительской категории </param>
     [HttpGet("{id}")]
-    public async Task<List<ArticleModel>> GetSortedArticlesBySectionId([FromRoute] int id)
+    public async Task<List<Article>> GetSortedArticlesBySectionId([FromRoute] int id)
         => await _mediator.Send(new GetSortedArticlesBySectionQuery { SectionId = id });
 }

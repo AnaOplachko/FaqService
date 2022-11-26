@@ -3,7 +3,7 @@ using FaqService.Application.Commands.Admin.Tag.Delete;
 using FaqService.Application.Commands.Admin.Tag.ReadAll;
 using FaqService.Application.Commands.Admin.Tag.ReadById;
 using FaqService.Application.Commands.Admin.Tag.Update;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +24,7 @@ public class TagController : ControllerBase
     /// Возвращает лист всех тэгов
     /// </summary>
     [HttpGet("all")]
-    public async Task<List<TagModel>> GetAllTags() => await _mediator.Send(new GetAllTagsQuery());
+    public async Task<List<Tag>> GetAllTags() => await _mediator.Send(new GetAllTagsQuery());
 
     /// <summary>
     /// Возвращает тэг по идентификатору со связанными статьями
@@ -38,14 +38,14 @@ public class TagController : ControllerBase
     /// Создание тэга
     /// </summary>
     [HttpPost("")]
-    public async Task<TagModel> CreateTag([FromBody] CreateTagCommand createTagCommand) 
+    public async Task<Tag> CreateTag([FromBody] CreateTagCommand createTagCommand) 
         => await _mediator.Send(createTagCommand);
 
     /// <summary>
     /// Изменение тэга
     /// </summary>
     [HttpPut("{id}")]
-    public async Task<TagModel> UpdateTag([FromRoute] int id, [FromBody] UpdateTagCommand updateTagCommand)
+    public async Task<Tag> UpdateTag([FromRoute] int id, [FromBody] UpdateTagCommand updateTagCommand)
     {
         updateTagCommand.Id = id;
         return await _mediator.Send(updateTagCommand);

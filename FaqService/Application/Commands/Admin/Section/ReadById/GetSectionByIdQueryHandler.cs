@@ -1,6 +1,6 @@
 using FaqDataAccess.Repositories.SectionRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Section.ReadById;

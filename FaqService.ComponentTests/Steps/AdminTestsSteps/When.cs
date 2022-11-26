@@ -1,4 +1,4 @@
-using FaqService.Application.Models;
+using FaqService.Application.Dtos;
 using FaqService.ComponentTests.ExternalEnvironment;
 using FaqService.ComponentTests.Helpers;
 using FaqService.ComponentTests.Hooks.Common;
@@ -14,7 +14,7 @@ public class When : Common
     public async Task WhenАдминистраторДобавляетНовуюКатегориюСИменемИИдентификаторомРодительскойКатегории(string name,
         int? parentId)
     {
-        Section = new SectionModel { Name = name, ParentId = parentId };
+        Section = new Section { Name = name, ParentId = parentId };
 
         var request = new RequestMessageBuilder().WithCreateSectionCommand(name, parentId).Build();
 
@@ -33,7 +33,7 @@ public class When : Common
     public async Task WhenАдминистраторОбновляетКатегориюСIdИмяИIdРодительскойКатегории(int id, string name,
         int? parentId)
     {
-        Section = new SectionModel { Id = id, Name = name, ParentId = parentId };
+        Section = new Section { Id = id, Name = name, ParentId = parentId };
 
         var request = new RequestMessageBuilder().WithUpdateSectionCommand(id, name, parentId).Build();
 
@@ -48,7 +48,7 @@ public class When : Common
             .Where(x => x.ParentId is null)
             .FirstOrDefault(x => x.Id != Section.ParentId);
 
-        Section = new SectionModel { Id = id, Name = name, ParentId = newParent!.Id };
+        Section = new Section { Id = id, Name = name, ParentId = newParent!.Id };
 
         var request = new RequestMessageBuilder().WithUpdateSectionCommand(id, name, newParent.Id).Build();
 
@@ -71,9 +71,8 @@ public class When : Common
     {
         var id = Section!.Id;
         var name = "new name";
-        var parentId = int.MaxValue;
 
-        var request = new RequestMessageBuilder().WithUpdateSectionCommand(id, name, parentId).Build();
+        var request = new RequestMessageBuilder().WithUpdateSectionCommand(id, name, IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -105,9 +104,7 @@ public class When : Common
     [When(@"Администратор запрашивает категорию с некорректным id")]
     public async Task WhenАдминистраторЗапрашиваетКатегориюСНекорректнымId()
     {
-        var incorrectId = Int32.MaxValue;
-
-        var request = new RequestMessageBuilder().WithAdminGetSectionByIdQuery(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithAdminGetSectionByIdQuery(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -123,9 +120,7 @@ public class When : Common
     [When(@"Администратор удаляет категорию с некорректным идентификатором")]
     public async Task WhenАдминистраторУдаляетКатегориюСНекорректнымИдентификатором()
     {
-        var incorrectId = int.MaxValue;
-
-        var request = new RequestMessageBuilder().WithDeleteSectionByIdCommand(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithDeleteSectionByIdCommand(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -147,7 +142,7 @@ public class When : Common
         var answer = "valid answer";
         var parentId = Section!.Id;
         
-        Article = new ArticleModel { Question = question, Answer = answer, ParentId = parentId };
+        Article = new Article { Question = question, Answer = answer, ParentId = parentId };
 
         var request = new RequestMessageBuilder().WithCreateArticleCommand(question, answer, parentId).Build();
 
@@ -185,9 +180,7 @@ public class When : Common
     [When(@"Администратор запрашивает статью с некорректным идентификатором")]
     public async Task WhenАдминистраторЗапрашиваетСтатьюСНекорректнымИдентификатором()
     {
-        var incorrectId = int.MaxValue;
-        
-        var request = new RequestMessageBuilder().WithAdminGetArticleByIdQuery(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithAdminGetArticleByIdQuery(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -203,9 +196,7 @@ public class When : Common
     [When(@"Администратор удаляет статью с некорректным идентификатором")]
     public async Task WhenАдминистраторУдаляетСтатьюСНекорректнымИдентификатором()
     {
-        var incorrectId = int.MaxValue;
-        
-        var request = new RequestMessageBuilder().WithDeleteArticleByIdCommand(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithDeleteArticleByIdCommand(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -219,7 +210,7 @@ public class When : Common
         var newParent = SectionsWithSubs.Where(section => section.ParentId != null)
             .FirstOrDefault(section => section.Id != Article.ParentId);
         
-        Article = new ArticleModel
+        Article = new Article
             { Id = id, Question = question, Answer = answer, ParentId = newParent!.Id, OrderPosition = null };
 
         var request =
@@ -249,10 +240,9 @@ public class When : Common
         var id = Article.Id;
         var question = "valid question";
         var answer = "valid answer";
-        var newParentId = int.MaxValue;
 
         var request = 
-            new RequestMessageBuilder().WithUpdateArticleCommand(id, question, answer, newParentId, null).Build();
+            new RequestMessageBuilder().WithUpdateArticleCommand(id, question, answer, IncorrectId, null).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -300,7 +290,7 @@ public class When : Common
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
 
-        Article = HttpResponseMessage.Content.ReadAs<ArticleModel>()!;
+        Article = HttpResponseMessage.Content.ReadAs<Article>()!;
         Articles.Add(Article);
     }
 
@@ -309,7 +299,7 @@ public class When : Common
     {
         var parent = SectionsWithSubs.FirstOrDefault(section => section.Name == parentSectionName);
 
-        Section = new SectionModel {Id = parent!.Id, Name = parent.Name, ParentId = parent.ParentId};
+        Section = new Section {Id = parent!.Id, Name = parent.Name, ParentId = parent.ParentId};
         
         var request = new RequestMessageBuilder().WithAdminSortedArticlesQuery(parent!.Id).Build();
 
@@ -341,13 +331,13 @@ public class When : Common
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
 
-        Article = HttpResponseMessage.Content.ReadAs<ArticleModel>()!;
+        Article = HttpResponseMessage.Content.ReadAs<Article>()!;
     }
 
     [When(@"Администратор добавляет новый тэг с названием ""(.*)""")]
     public async Task WhenАдминистраторДобавляетНовыйТэгСНазванием(string name)
     {
-        Tag = new TagModel { Name = name };
+        Tag = new Tag { Name = name };
 
         var request = new RequestMessageBuilder().WithCreateTagCommand(name).Build();
 
@@ -373,9 +363,7 @@ public class When : Common
     [When(@"Администратор запрашивает тэг с некорректным идентификатором")]
     public async Task WhenАдминистраторЗапрашиваетТэгСНекорректнымИдентификатором()
     {
-        var incorrectId = int.MaxValue;
-        
-        var request = new RequestMessageBuilder().WithAdminGetTagByIdQuery(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithAdminGetTagByIdQuery(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -383,7 +371,7 @@ public class When : Common
     [When(@"Администратор обновляет тэг устанавливая имя ""(.*)""")]
     public async Task WhenАдминистраторОбновляетТэгУстанавливаяИмя(string name)
     {
-        Tag = new TagModel { Id = Tag.Id, Name = name };
+        Tag = new Tag { Id = Tag.Id, Name = name };
 
         var request = new RequestMessageBuilder().WithUpdateTagCommand(Tag.Id, name).Build();
 
@@ -401,9 +389,7 @@ public class When : Common
     [When(@"Администратор удаляет тэг с некорректным идентификатором")]
     public async Task WhenАдминистраторУдаляетТэгСНекорректнымИдентификатором()
     {
-        var incorrectId = int.MaxValue;
-        
-        var request = new RequestMessageBuilder().WithDeleteTagByIdCommand(incorrectId).Build();
+        var request = new RequestMessageBuilder().WithDeleteTagByIdCommand(IncorrectId).Build();
 
         HttpResponseMessage = await ExtEnvironment.TestServer!.CreateClient().SendAsync(request);
     }
@@ -411,7 +397,7 @@ public class When : Common
     [When(@"Администратор устанавливает тэги с некорректными идентификаторами")]
     public async Task WhenАдминистраторУстанавливаетТэгиСНекорректнымиИдентификаторами()
     {
-        var tags = new List<int> { int.MaxValue };
+        var tags = new List<int> { IncorrectId };
 
         var request = new RequestMessageBuilder().WithSetTagsCommand(Article.Id, tags).Build();
 

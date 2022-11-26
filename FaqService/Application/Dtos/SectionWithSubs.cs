@@ -1,6 +1,6 @@
-namespace FaqService.Application.Models;
+namespace FaqService.Application.Dtos;
 
-public class SectionWithSubs
+public record SectionWithSubs
 {
     /// <summary>
     /// Идентификатор
@@ -20,7 +20,7 @@ public class SectionWithSubs
     /// <summary>
     /// Вложенные статьи
     /// </summary>
-    public List<ArticleModel> Articles { get; set; } = null!;
+    public List<Article> Articles { get; set; } = null!;
 
     /// <summary>
     /// Вложенные категории
@@ -37,8 +37,8 @@ public class SectionWithSubs
         ParentId = section.ParentId;
         
         Articles = section.Articles != null! 
-            ? section.Articles.Select(x=> new ArticleModel(x)).ToList() 
-            : new List<ArticleModel>();
+            ? section.Articles.Select(x=> new Article(x)).ToList() 
+            : new List<Article>();
         
         Subsections = section.Subsections != null! 
             ? section.Subsections.Select(x=> new SectionWithSubs(x)).ToList() 
@@ -48,12 +48,12 @@ public class SectionWithSubs
     /// <summary>
     /// ctor
     /// </summary>
-    public SectionWithSubs(SectionModel section)
+    public SectionWithSubs(Section section)
     {
         Id = section.Id;
         Name = section.Name;
         ParentId = section.ParentId;
-        Articles = new List<ArticleModel>();
+        Articles = new List<Article>();
         Subsections = new List<SectionWithSubs>();
     }
 

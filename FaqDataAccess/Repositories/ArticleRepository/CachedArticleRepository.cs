@@ -25,7 +25,7 @@ public class CachedArticleRepository : ICachedArticleRepository
     /// <summary>
     /// Поиск статей 
     /// </summary>
-    public async Task<List<Article>> SearchArticlesAsync(string? searchString)
+    public async ValueTask<List<Article>> SearchArticlesAsync(string? searchString)
     {
         IEnumerable<Article> articles = await GetAllArticlesAsync();
         List<Article> result = null!;
@@ -54,7 +54,7 @@ public class CachedArticleRepository : ICachedArticleRepository
     /// <summary>
     /// Возвращает все статьи
     /// </summary>
-    public async Task<List<Article>> GetAllArticlesAsync()
+    public async ValueTask<List<Article>> GetAllArticlesAsync()
     {
         var cacheKey = "articles";
 
@@ -92,6 +92,6 @@ public class CachedArticleRepository : ICachedArticleRepository
     /// <summary>
     /// Возвращает статью по идентификатору
     /// </summary>
-    public async Task<Article?> GetArticleByIdAsync(int id)
+    public async ValueTask<Article?> GetArticleByIdAsync(int id)
         => (await GetAllArticlesAsync()).FirstOrDefault(x => x.Id == id);
 }

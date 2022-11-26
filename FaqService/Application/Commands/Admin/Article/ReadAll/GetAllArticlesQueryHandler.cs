@@ -1,6 +1,5 @@
 using FaqDataAccess.Repositories.ArticleRepository;
 using FaqService.Application.Exceptions;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Article.ReadAll;
@@ -8,7 +7,7 @@ namespace FaqService.Application.Commands.Admin.Article.ReadAll;
 /// <summary>
 /// Обработчик запроса на получение всех статей
 /// </summary>
-public class GetAllArticlesQueryHandler : IRequestHandler<GetAllArticlesQuery, List<ArticleModel>>
+public class GetAllArticlesQueryHandler : IRequestHandler<GetAllArticlesQuery, List<Dtos.Article>>
 {
     private readonly IArticleRepository _articleRepository;
 
@@ -21,13 +20,13 @@ public class GetAllArticlesQueryHandler : IRequestHandler<GetAllArticlesQuery, L
     /// <summary>
     /// Обработчик
     /// </summary>
-    public async Task<List<ArticleModel>> Handle(GetAllArticlesQuery request, CancellationToken cancellationToken)
+    public async Task<List<Dtos.Article>> Handle(GetAllArticlesQuery request, CancellationToken cancellationToken)
     {
         var articles = await _articleRepository.GetAllArticlesAsync();
 
         if (articles.Count is 0)
             throw new NoEntityException("No articles found");
         
-        return articles.Select(x=> new ArticleModel(x)).ToList();
+        return articles.Select(x=> new Dtos.Article(x)).ToList();
     }
 }

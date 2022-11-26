@@ -1,4 +1,3 @@
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Tag.Create;
@@ -6,7 +5,7 @@ namespace FaqService.Application.Commands.Admin.Tag.Create;
 /// <summary>
 /// Команда на создание тэга
 /// </summary>
-public class CreateTagCommand : IRequest<TagModel>
+public class CreateTagCommand : IRequest<Dtos.Tag>
 {
     /// <summary>
     /// Название тэга

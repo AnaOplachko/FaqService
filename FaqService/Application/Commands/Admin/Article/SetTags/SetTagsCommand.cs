@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using FaqService.Application.Models;
 using MediatR;
 
 namespace FaqService.Application.Commands.Admin.Article.SetTags;
@@ -7,7 +6,7 @@ namespace FaqService.Application.Commands.Admin.Article.SetTags;
 /// <summary>
 /// Команда на установку администратором тэгов для статьи
 /// </summary>
-public class SetTagsCommand : IRequest<ArticleModel>
+public class SetTagsCommand : IRequest<Dtos.Article>
 {
     /// <summary>
     /// Идентификатор статьи
